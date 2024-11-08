@@ -30,6 +30,7 @@ class nfs::client::redhat::service {
       6 => Service['rpcbind'],
       5 => [Package['portmap'], Package['nfs-utils']]
     },
+    provider => 'systemd',       # Use systemd for OL8, as it's the default for OL8 and other systemd systems
   }
 
   if $::nfs::client::redhat::params::osmajor == 5 or $::nfs::client::redhat::params::osmajor == 6 {
