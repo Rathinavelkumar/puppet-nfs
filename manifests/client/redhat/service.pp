@@ -3,7 +3,13 @@
 
 class nfs::client::redhat::service {
 
-# lint:ignore:selector_inside_resource  would not add much to readability
+  # Ensure rpcbind is managed
+  service { 'rpcbind':
+    ensure => running,
+    enable => true,
+  }
+
+  # lint:ignore:selector_inside_resource  would not add much to readability
 
   service {'nfslock':
     ensure    => running,
