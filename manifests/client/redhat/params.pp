@@ -25,6 +25,10 @@ class nfs::client::redhat::params {
     /^\d{2,}/: {
       $osmajor = 7
     }
+    # Handle Oracle Linux 8
+    /^8\.\d+$/ : {
+      $osmajor = 8
+    }
     default:{
       fail("Operatingsystemrelease ${::operatingsystemrelease} not supported")
     }
