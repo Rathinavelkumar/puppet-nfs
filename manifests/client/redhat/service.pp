@@ -9,14 +9,17 @@ class nfs::client::redhat::service {
     ensure    => running,
     name      => $::nfs::client::redhat::params::osmajor ? {
       7       => 'rpc-statd',
+      8       => 'nfs-lock',  # OL8 uses 'nfs-lock' instead of 'rpc-statd'
       default => 'nfslock'
     },
     enable    => $::nfs::client::redhat::params::osmajor ? {
       7       => undef,
+      8       => true,         # OL8 typically enables the service by default
       default => true
     },
     hasstatus => true,
     require   => $::nfs::client::redhat::params::osmajor ? {
+      8 => Service['rpcbind'], # OL8 still requires rpcbind
       7 => Service['rpcbind'],
       6 => Service['rpcbind'],
       5 => [Package['portmap'], Package['nfs-utils']]
