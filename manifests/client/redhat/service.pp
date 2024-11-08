@@ -61,6 +61,10 @@ class nfs::client::redhat::service {
     }
   }
 
-# lint:endignore
+  # Ensure nfs-utils package is installed (necessary for all versions)
+  package { 'nfs-utils':
+    ensure => installed,
+  }
+  # lint:endignore
 
 }
