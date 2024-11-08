@@ -15,7 +15,7 @@ class nfs::client::redhat::service {
     ensure    => running,
     name      => $::nfs::client::redhat::params::osmajor ? {
       7       => 'rpc-statd',
-      8       => 'nfs-lock',  # OL8 uses 'nfs-lock' instead of 'rpc-statd'
+      8       => 'nfs-server',  # OL8 uses 'nfs-server' instead of 'rpc-statd'
       default => 'nfslock'
     },
     enable    => $::nfs::client::redhat::params::osmajor ? {
