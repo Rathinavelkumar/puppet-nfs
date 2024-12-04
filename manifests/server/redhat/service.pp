@@ -1,7 +1,7 @@
 class nfs::server::redhat::service {
 
   if $nfs::server::redhat::service_manage {
-    if $::operatingsystemmajrelease and $::operatingsystemmajrelease =~ /^7/ {
+    if $::operatingsystemmajrelease =~ /^7/ or $::operatingsystemmajrelease =~ /^8/ {
       $service_name = 'nfs-server'
     } else {
       $service_name = 'nfs'
