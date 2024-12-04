@@ -5,6 +5,14 @@ class nfs::client::redhat::service {
 
 # lint:ignore:selector_inside_resource  would not add much to readability
 
+ # Ensure rpcbind is managed
+  service { 'rpcbind':
+    ensure => running,
+    enable => true,
+    require  => Package['nfs-utils'],  # Ensure rpcbind starts after nfs-utils
+    provider => 'systemd',             # Use systemd provider (required for OL8)
+  }
+
   service {'nfslock':
     ensure    => running,
     name      => $::nfs::client::redhat::params::osmajor ? {
