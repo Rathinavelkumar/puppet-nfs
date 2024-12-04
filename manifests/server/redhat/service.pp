@@ -13,6 +13,7 @@ class nfs::server::redhat::service {
         enable     => true,
         hasrestart => true,
         hasstatus  => true,
+        provider   => 'systemd',  # Ensure systemd is used for service management
         require    => Package['nfs-utils'],
         subscribe  => [ Concat['/etc/exports'], Augeas['/etc/idmapd.conf'] ],
       }
@@ -22,6 +23,7 @@ class nfs::server::redhat::service {
         enable     => true,
         hasrestart => true,
         hasstatus  => true,
+        provider   => 'systemd',  # Ensure systemd is used for service management
         require    => Package['nfs-utils'],
         subscribe  => Concat['/etc/exports'],
       }
