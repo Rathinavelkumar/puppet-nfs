@@ -1,3 +1,3 @@
-class nfs {
+class OL8nfs {
 
 }
