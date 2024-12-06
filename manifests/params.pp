@@ -1,4 +1,4 @@
-class nfs::params (
+class ol8nfs::params (
   $client_package_ensure      = 'installed',
   $server_package_ensure      = 'installed',
   $nfs_v4                     = false,
