@@ -1,5 +1,5 @@
 # Nasty ass hax to allow several levels of directories
-define nfs::mkdir (
+define ol8nfs::mkdir (
   $owner = 'root',
   $group = 'root',
   $perm  = '0755'
