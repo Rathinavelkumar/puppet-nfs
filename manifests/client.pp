@@ -32,13 +32,13 @@
 #    nfs_v4_idmap_domain => $::domain,
 #  }
 
-class nfs::client (
+class ol8nfs::client (
   $package_ensure      = $::nfs::params::client_package_ensure,
   $nfs_v4              = $::nfs::params::nfs_v4,
   $nfs_v4_mount_root   = $::nfs::params::nfs_v4_mount_root,
   $nfs_v4_idmap_domain = $::nfs::params::nfs_v4_idmap_domain,
   $mounts              = undef
-) inherits nfs::params {
+) inherits ol8nfs::params {
 
   validate_bool($nfs_v4)
 
@@ -49,7 +49,7 @@ class nfs::client (
   -> Class["::nfs::client::${::nfs::params::osfamily}::service"]
   -> Class['::nfs::client']
 
-  if !defined( Class["nfs::client::${::nfs::params::osfamily}"]) {
+  if !defined( Class["ol8nfs::client::${::nfs::params::osfamily}"]) {
     class{ "nfs::client::${::nfs::params::osfamily}":
       nfs_v4              => $nfs_v4,
       nfs_v4_idmap_domain => $nfs_v4_idmap_domain,
@@ -57,7 +57,7 @@ class nfs::client (
   }
 
   if $mounts {
-    create_resources(nfs::client::mount, $mounts)
+    create_resources(ol8nfs::client::mount, $mounts)
   }
 
 }
