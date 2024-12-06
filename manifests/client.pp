@@ -44,13 +44,13 @@ class ol8nfs::client (
 
   # ensure dependencies for mount
 
-  Class["::nfs::client::${::nfs::params::osfamily}::install"]
-  -> Class["::nfs::client::${::nfs::params::osfamily}::configure"]
-  -> Class["::nfs::client::${::nfs::params::osfamily}::service"]
-  -> Class['::nfs::client']
+  Class["::ol8nfs::client::${::ol8nfs::params::osfamily}::install"]
+  -> Class["::ol8nfs::client::${::ol8nfs::params::osfamily}::configure"]
+  -> Class["::ol8nfs::client::${::ol8nfs::params::osfamily}::service"]
+  -> Class['::ol8nfs::client']
 
-  if !defined( Class["ol8nfs::client::${::nfs::params::osfamily}"]) {
-    class{ "nfs::client::${::nfs::params::osfamily}":
+  if !defined( Class["ol8nfs::client::${::ol8nfs::params::osfamily}"]) {
+    class{ "ol8nfs::client::${::ol8nfs::params::osfamily}":
       nfs_v4              => $nfs_v4,
       nfs_v4_idmap_domain => $nfs_v4_idmap_domain,
     }
