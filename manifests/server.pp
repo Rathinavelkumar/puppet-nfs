@@ -36,7 +36,7 @@
 #    nfs_v4_idmap_domain => $::domain,
 #  }
 
-class nfs::server (
+class ol8nfs::server (
   $package_ensure               = $::nfs::params::server_package_ensure,
   $nfs_v4                       = $nfs::params::nfs_v4,
   $nfs_v4_export_root           = $nfs::params::nfs_v4_export_root,
@@ -57,14 +57,14 @@ class nfs::server (
   $mountd_threads               = undef,
   #
   $exports                      = undef,
-) inherits nfs::params {
+) inherits ol8nfs::params {
 
   validate_bool($nfs_v4)
   validate_bool($service_manage)
   validate_bool($nfs_v4_root_export_remounts)
   validate_bool($nfs_v4_root_export_atboot)
 
-  class { "nfs::server::${::nfs::params::osfamily}":
+  class { "ol8nfs::server::${::ol8nfs::params::osfamily}":
     nfs_v4              => $nfs_v4,
     nfs_v4_idmap_domain => $nfs_v4_idmap_domain,
     mountd_port         => $mountd_port,
@@ -72,10 +72,10 @@ class nfs::server (
     service_manage      => $service_manage,
   }
 
-  include nfs::server::configure
+  include ol8nfs::server::configure
 
   if $exports {
-    create_resources(nfs::server::export, $exports)
+    create_resources(ol8nfs::server::export, $exports)
   }
 
 }
