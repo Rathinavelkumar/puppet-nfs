@@ -1,4 +1,4 @@
-define nfs::client::mount (
+define ol8nfs::client::mount (
   $server,
   $share,
   $ensure    = 'mounted',
@@ -7,45 +7,45 @@ define nfs::client::mount (
   $atboot    = false,
   $options   = '_netdev',
   $bindmount = undef,
-  $nfstag    = undef,
+  $ol8nfstag    = undef,
   $owner     = 'root',
   $group     = 'root',
   $perm      = '0755',
 ) {
 
-  include ::nfs::client
+  include ::ol8nfs::client
 
-  if $nfs::client::nfs_v4 == true {
+  if $ol8nfs::client::ol8nfs_v4 == true {
 
     if $mount == undef {
-      $_nfs4_mount = "${nfs::client::nfs_v4_mount_root}/${share}"
+      $_ol8nfs4_mount = "${ol8nfs::client::ol8nfs_v4_mount_root}/${share}"
     } else {
-      $_nfs4_mount = $mount
+      $_ol8nfs4_mount = $mount
     }
 
-    nfs::mkdir { $_nfs4_mount:
+    ol8nfs::mkdir { $_ol8nfs4_mount:
       owner => $owner,
       group => $group,
       perm  => $perm;
     }
 
-    mount {"shared ${server}:${share} by ${::clientcert} on ${_nfs4_mount}":
+    mount {"shared ${server}:${share} by ${::clientcert} on ${_ol8nfs4_mount}":
       ensure   => $ensure,
       device   => "${server}:/${share}",
-      fstype   => 'nfs4',
-      name     => $_nfs4_mount,
+      fstype   => 'ol8nfs4',
+      name     => $_ol8nfs4_mount,
       options  => $options,
       remounts => $remounts,
       atboot   => $atboot,
       require  => [
-        Nfs::Mkdir[$_nfs4_mount],
-        Class['::nfs::client'],
+        ol8nfs::Mkdir[$_ol8nfs4_mount],
+        Class['::ol8nfs::client'],
       ],
     }
 
 
     if $bindmount != undef {
-      nfs::client::mount::nfs_v4::bindmount { $_nfs4_mount:
+      ol8nfs::client::mount::ol8nfs_v4::bindmount { $_ol8nfs4_mount:
         ensure     => $ensure,
         mount_name => $bindmount,
       }
@@ -61,7 +61,7 @@ define nfs::client::mount (
       $_mount = $mount
     }
 
-    nfs::mkdir{ $_mount:
+    ol8nfs::mkdir{ $_mount:
       owner => $owner,
       group => $group,
       perm  => $perm,
@@ -70,14 +70,14 @@ define nfs::client::mount (
     mount {"shared ${server}:${share} by ${::clientcert} ${_mount}":
       ensure   => $ensure,
       device   => "${server}:${share}",
-      fstype   => 'nfs',
+      fstype   => 'ol8nfs',
       name     => $_mount,
       options  => $options,
       remounts => $remounts,
       atboot   => $atboot,
       require  => [
-        Nfs::Mkdir[$_mount],
-        Class['::nfs::client'],
+        ol8nfs::Mkdir[$_mount],
+        Class['::ol8nfs::client'],
       ],
     }
 

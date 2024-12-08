@@ -1,11 +1,11 @@
-class nfs::client::ubuntu::install {
+class ol8nfs::client::ubuntu::install {
 
   package { 'rpcbind':
-    ensure => $::nfs::client::package_ensure,
+    ensure => $::ol8nfs::client::package_ensure,
   }
 
-  package { ['nfs-common', 'nfs4-acl-tools']:
-    ensure => $::nfs::client::package_ensure,
+  package { ['ol8nfs-common', 'ol8nfs4-acl-tools']:
+    ensure => $::ol8nfs::client::package_ensure,
   }
 
 }

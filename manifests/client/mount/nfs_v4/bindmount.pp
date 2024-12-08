@@ -1,9 +1,9 @@
-define nfs::client::mount::nfs_v4::bindmount (
+define ol8nfs::client::mount::ol8nfs_v4::bindmount (
   $mount_name,
   $ensure = 'present',
 ) {
 
-  nfs::mkdir{ $mount_name: }
+  ol8nfs::mkdir{ $mount_name: }
 
   mount {
     $mount_name:
@@ -12,7 +12,7 @@ define nfs::client::mount::nfs_v4::bindmount (
       atboot  => true,
       fstype  => 'none',
       options => 'bind',
-      require => Nfs::Mkdir[$mount_name],
+      require => ol8nfs::Mkdir[$mount_name],
   }
 
 }

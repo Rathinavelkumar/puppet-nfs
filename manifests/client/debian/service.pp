@@ -1,4 +1,4 @@
-class nfs::client::debian::service {
+class ol8nfs::client::debian::service {
 
   service { 'rpcbind':
     ensure    => running,
@@ -6,12 +6,12 @@ class nfs::client::debian::service {
     hasstatus => false,
   }
 
-  if $nfs::client::debian::nfs_v4 {
+  if $ol8nfs::client::debian::ol8nfs_v4 {
     service { 'idmapd':
       ensure    => running,
       enable    => true,
-      name      => 'nfs-common',
-      subscribe => Augeas['/etc/idmapd.conf', '/etc/default/nfs-common'],
+      name      => 'ol8nfs-common',
+      subscribe => Augeas['/etc/idmapd.conf', '/etc/default/ol8nfs-common'],
     }
   }
 }

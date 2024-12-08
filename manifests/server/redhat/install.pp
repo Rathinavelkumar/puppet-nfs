@@ -1,7 +1,7 @@
-class nfs::server::redhat::install {
+class ol8nfs::server::redhat::install {
 
-  package { 'nfs4-acl-tools':
-    ensure => $::nfs::server::package_ensure,
+  package { 'ol8nfs4-acl-tools':
+    ensure => $::ol8nfs::server::package_ensure,
   }
 
 }

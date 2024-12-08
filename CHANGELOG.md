@@ -7,11 +7,11 @@
 
 #### Bugfixes:
 
-- fix mountd thread number parameter for nfs server
+- fix mountd thread number parameter for ol8nfs server
 
 #### Features:
 
-- set specific version of nfs client packages with `package_ensure`
+- set specific version of ol8nfs client packages with `package_ensure`
 - allow client mounts to be defined in Hiera
 - Ubuntu: support 16.04
 
@@ -34,8 +34,8 @@
 
 #### Bugfixes:
 
-- (174a9b4) #53 Debian do not stop (nonexisting) service, when using nfs-v3
-- (21c2a1d) #54 #55 Debian/Ubuntu enable the idmapd service on boot, when using nfs-v3
+- (174a9b4) #53 Debian do not stop (nonexisting) service, when using ol8nfs-v3
+- (21c2a1d) #54 #55 Debian/Ubuntu enable the idmapd service on boot, when using ol8nfs-v3
 
 ## 2015-10-23 - 1.7.1 (Bugfix release)
 
@@ -67,19 +67,19 @@
 
 - Fixed #28 Fix puppet dependency to puppetlabs-concat
 - Fixed #32 #33 Fix service in EL7 that can not be enabled.
-- Fixed #34 Fixed owner, group and perms on NFSv4 mount.
+- Fixed #34 Fixed owner, group and perms on ol8nfsv4 mount.
 
 ## 2015-06-05 - 1.5.0 (Feature/Bugfixe release)
 
 #### Features:
 
-- Issue #22 Make the name/ip of the server a config option in `nfs::server::export`
-- Issue #24 More flexible nfsv4 export naming
+- Issue #22 Make the name/ip of the server a config option in `ol8nfs::server::export`
+- Issue #24 More flexible ol8nfsv4 export naming
 
 #### Bugfixes:
 
 - Fixed #20 fix client examples in README
-- Fixed #21 Debian: fix service name fpr nfs v4
+- Fixed #21 Debian: fix service name fpr ol8nfs v4
 - Fixed #23 Default mount name in `client::mount` `should be undef, so it gets filled in the module
 - Fixed #25 Fix tests for travis ci
 
@@ -136,8 +136,8 @@
 
 #### Behavior changes
 
-- Parameter `tag` is now `nfstag`
+- Parameter `tag` is now `ol8nfstag`
 
 ## 2012-11.18 - 1.1.1
 
-Original release of deprecated module haraldsk/nfs
+Original release of deprecated module haraldsk/ol8nfs

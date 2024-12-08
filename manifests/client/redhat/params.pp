@@ -1,7 +1,7 @@
-# Shamefully stolen from https://github.com/frimik/puppet-nfs
+# Shamefully stolen from https://github.com/frimik/puppet-ol8nfs
 # refactored a bit
 
-class nfs::client::redhat::params {
+class ol8nfs::client::redhat::params {
 
   case $::operatingsystemrelease {
     /^5\.\d+/: {

@@ -1,4 +1,4 @@
-class nfs::client::ubuntu::service {
+class ol8nfs::client::ubuntu::service {
 
   service { 'rpcbind':
     ensure    => running,
@@ -6,12 +6,12 @@ class nfs::client::ubuntu::service {
     hasstatus => false,
   }
 
-  if $nfs::client::ubuntu::nfs_v4 {
+  if $ol8nfs::client::ubuntu::ol8nfs_v4 {
     if versioncmp($::lsbdistrelease, '16.04') < 0 {
       service { 'idmapd':
         ensure    => running,
         enable    => true,
-        subscribe => Augeas['/etc/idmapd.conf', '/etc/default/nfs-common'],
+        subscribe => Augeas['/etc/idmapd.conf', '/etc/default/ol8nfs-common'],
       }
     }
   } else {

@@ -1,3 +1,3 @@
-class nfs::server::gentoo::install {
+class ol8nfs::server::gentoo::install {
 
 }

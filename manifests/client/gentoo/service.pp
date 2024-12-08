@@ -1,7 +1,7 @@
-class nfs::client::gentoo::service {
+class ol8nfs::client::gentoo::service {
 
   Service{
-    require => Class['nfs::client::gentoo::configure']
+    require => Class['ol8nfs::client::gentoo::configure']
   }
 
 }

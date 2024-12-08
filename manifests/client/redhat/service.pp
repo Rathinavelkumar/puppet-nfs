@@ -1,7 +1,7 @@
-# Shamefully stolen from https://github.com/frimik/puppet-nfs
+# Shamefully stolen from https://github.com/frimik/puppet-ol8nfs
 # refactored a bit
 
-class nfs::client::redhat::service {
+class ol8nfs::client::redhat::service {
 
 # lint:ignore:selector_inside_resource  would not add much to readability
 
@@ -9,58 +9,58 @@ class nfs::client::redhat::service {
   service { 'rpcbind':
     ensure => running,
     enable => true,
-    require  => Package['nfs-utils'],  # Ensure rpcbind starts after nfs-utils
+    require  => Package['ol8nfs-utils'],  # Ensure rpcbind starts after ol8nfs-utils
     provider => 'systemd',             # Use systemd provider (required for OL8)
   }
 
-  service {'nfslock':
+  service {'ol8nfslock':
     ensure    => running,
-    name      => $::nfs::client::redhat::params::osmajor ? {
+    name      => $::ol8nfs::client::redhat::params::osmajor ? {
       7       => 'rpc-statd',
-      8       => 'rpc-statd',  # Use rpc-statd for OL8 instead of nfs-lock
-      default => 'nfslock'
+      8       => 'rpc-statd',  # Use rpc-statd for OL8 instead of ol8nfs-lock
+      default => 'ol8nfslock'
     },
-    enable    => $::nfs::client::redhat::params::osmajor ? {
+    enable    => $::ol8nfs::client::redhat::params::osmajor ? {
       7       => undef,
       8       => true,         # OL8 typically enables the service by default
       default => true
     },
     hasstatus => true,
-    require   => $::nfs::client::redhat::params::osmajor ? {
+    require   => $::ol8nfs::client::redhat::params::osmajor ? {
       8 => Service['rpcbind'], # OL8 still requires rpcbind
       7 => Service['rpcbind'],
       6 => Service['rpcbind'],
-      5 => [Package['portmap'], Package['nfs-utils']]
+      5 => [Package['portmap'], Package['ol8nfs-utils']]
     },
     provider => 'systemd', 
   }
 
-  if $::nfs::client::redhat::params::osmajor == 5 or $::nfs::client::redhat::params::osmajor == 6 {
+  if $::ol8nfs::client::redhat::params::osmajor == 5 or $::ol8nfs::client::redhat::params::osmajor == 6 {
     service { 'netfs':
       enable  => true,
-      require => $::nfs::client::redhat::params::osmajor ? {
-        6 => Service['nfslock'],
-        5 => [Service['portmap'], Service['nfslock']],
+      require => $::ol8nfs::client::redhat::params::osmajor ? {
+        6 => Service['ol8nfslock'],
+        5 => [Service['portmap'], Service['ol8nfslock']],
       },
     }
   }
 
-  if $::nfs::client::redhat::params::osmajor == 6 or $::nfs::client::redhat::params::osmajor == 7 {
+  if $::ol8nfs::client::redhat::params::osmajor == 6 or $::ol8nfs::client::redhat::params::osmajor == 7 {
     service {'rpcbind':
       ensure    => running,
-      enable    => $::nfs::client::redhat::params::osmajor ? {
+      enable    => $::ol8nfs::client::redhat::params::osmajor ? {
         7       => undef,
         default => true
       },
       hasstatus => true,
-      require   => [Package['rpcbind'], Package['nfs-utils']],
+      require   => [Package['rpcbind'], Package['ol8nfs-utils']],
     }
-  } elsif $::nfs::client::redhat::params::osmajor == 5 {
+  } elsif $::ol8nfs::client::redhat::params::osmajor == 5 {
     service { 'portmap':
       ensure    => running,
       enable    => true,
       hasstatus => true,
-      require   => [Package['portmap'], Package['nfs-utils']],
+      require   => [Package['portmap'], Package['ol8nfs-utils']],
     }
   }
 

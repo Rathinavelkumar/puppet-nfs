@@ -1,19 +1,19 @@
-class nfs::server::configure {
+class ol8nfs::server::configure {
 
   concat {'/etc/exports':
     ensure  => present,
-    require => Class["nfs::server::${::nfs::params::osfamily}"],
+    require => Class["ol8nfs::server::${::ol8nfs::params::osfamily}"],
   }
 
 
   concat::fragment{
-    'nfs_exports_header':
+    'ol8nfs_exports_header':
       target  => '/etc/exports',
-      content => "# This file is configured through the nfs::server puppet module\n",
+      content => "# This file is configured through the ol8nfs::server puppet module\n",
       order   => '01';
   }
 
-  if $nfs::server::nfs_v4 == true {
-    include nfs::server::nfs_v4::configure
+  if $ol8nfs::server::ol8nfs_v4 == true {
+    include ol8nfs::server::ol8nfs_v4::configure
   }
 }

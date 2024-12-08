@@ -1,9 +1,9 @@
-class nfs::server::darwin(
-  $nfs_v4              = false,
-  $nfs_v4_idmap_domain = undef,
+class ol8nfs::server::darwin(
+  $ol8nfs_v4              = false,
+  $ol8nfs_v4_idmap_domain = undef,
   $mountd_port         = undef,
   $mountd_threads      = undef,
   $service_manage      = true,
 ) {
-  fail('NFS server is not supported on Darwin')
+  fail('ol8nfs server is not supported on Darwin')
 }

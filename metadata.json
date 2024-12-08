@@ -56,14 +56,14 @@
       "version_requirement": ">=5.0.0 <7.0.0"
     }
   ],
-  "name": "echocat-nfs",
+  "name": "echocat-ol8nfs",
   "version": "2.0.0",
-  "source": "https://github.com/echocat/puppet-nfs.git",
+  "source": "https://github.com/echocat/puppet-ol8nfs.git",
   "author": "echocat",
   "license": "Apache-2.0",
-  "summary": "Installs and configures NFS server and clients",
-  "project_page": "https://github.com/echocat/puppet-nfs",
-  "issues_url": "https://github.com/echocat/puppet-nfs/issues",
+  "summary": "Installs and configures ol8nfs server and clients",
+  "project_page": "https://github.com/echocat/puppet-ol8nfs",
+  "issues_url": "https://github.com/echocat/puppet-ol8nfs/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 4.8.0"},
     {"name":"puppetlabs/concat","version_requirement":">= 1.1.1 < 5.0.0"}

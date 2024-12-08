@@ -1,7 +1,7 @@
-class nfs::server::ubuntu::install {
+class ol8nfs::server::ubuntu::install {
 
-  package { 'nfs-kernel-server':
-    ensure => $::nfs::server::package_ensure
+  package { 'ol8nfs-kernel-server':
+    ensure => $::ol8nfs::server::package_ensure
   }
 
 }

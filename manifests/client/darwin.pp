@@ -1,6 +1,6 @@
-class nfs::client::darwin (
-  $nfs_v4              = false,
-  $nfs_v4_idmap_domain = undef
+class ol8nfs::client::darwin (
+  $ol8nfs_v4              = false,
+  $ol8nfs_v4_idmap_domain = undef
 ) {
-  fail('NFS client is not supported on Darwin')
+  fail('ol8nfs client is not supported on Darwin')
 }

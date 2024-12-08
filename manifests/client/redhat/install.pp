@@ -1,22 +1,22 @@
-# Shamefully stolen from https://github.com/frimik/puppet-nfs
+# Shamefully stolen from https://github.com/frimik/puppet-ol8nfs
 # refactored a bit
 
-class nfs::client::redhat::install {
+class ol8nfs::client::redhat::install {
 
   Package {
-    before => Class['nfs::client::redhat::configure']
+    before => Class['ol8nfs::client::redhat::configure']
   }
-  package { 'nfs-utils':
-    ensure => $::nfs::client::package_ensure,
+  package { 'ol8nfs-utils':
+    ensure => $::ol8nfs::client::package_ensure,
   }
 
-  if $::nfs::client::redhat::params::osmajor == 6 or $::nfs::client::redhat::params::osmajor == 7 {
+  if $::ol8nfs::client::redhat::params::osmajor == 6 or $::ol8nfs::client::redhat::params::osmajor == 7 {
     package {'rpcbind':
-      ensure => $::nfs::client::package_ensure,
+      ensure => $::ol8nfs::client::package_ensure,
     }
-  } elsif $::nfs::client::redhat::params::osmajor == 5 {
+  } elsif $::ol8nfs::client::redhat::params::osmajor == 5 {
     package { 'portmap':
-      ensure => $::nfs::client::package_ensure,
+      ensure => $::ol8nfs::client::package_ensure,
     }
   }
 }
