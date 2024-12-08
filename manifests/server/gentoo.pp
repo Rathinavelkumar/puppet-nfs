@@ -1,16 +1,16 @@
 # Gentoo specifix stuff
-class nfs::server::gentoo(
-  $nfs_v4 = false,
-  $nfs_v4_idmap_domain = undef,
+class olnfs::server::gentoo(
+  $olnfs_v4 = false,
+  $olnfs_v4_idmap_domain = undef,
   $mountd_port         = undef,
   $mountd_threads      = undef,
   $service_manage      = true,
 ) {
 
-  if !defined(Class['nfs::client::gentoo']) {
-    class{ 'nfs::client::gentoo':
-      nfs_v4              => $nfs_v4,
-      nfs_v4_idmap_domain => $nfs_v4_idmap_domain,
+  if !defined(Class['olnfs::client::gentoo']) {
+    class{ 'olnfs::client::gentoo':
+      olnfs_v4              => $olnfs_v4,
+      olnfs_v4_idmap_domain => $olnfs_v4_idmap_domain,
     }
   }
 
@@ -22,6 +22,6 @@ class nfs::server::gentoo(
     fail('setting the mountd thread number currently not supported on Gentoo')
   }
 
-  include nfs::server::gentoo::install, nfs::server::gentoo::service
+  include olnfs::server::gentoo::install, olnfs::server::gentoo::service
 
 }

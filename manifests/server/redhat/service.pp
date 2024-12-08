@@ -1,20 +1,20 @@
-class nfs::server::redhat::service {
+class olnfs::server::redhat::service {
 
-  if $nfs::server::redhat::service_manage {
+  if $olnfs::server::redhat::service_manage {
     if $::operatingsystemmajrelease =~ /^7/ or $::operatingsystemmajrelease =~ /^8/ {
-      $service_name = 'nfs-server'
+      $service_name = 'olnfs-server'
     } else {
-      $service_name = 'nfs'
+      $service_name = 'olnfs'
     }
 
-    if $nfs::server::redhat::nfs_v4 == true {
+    if $olnfs::server::redhat::olnfs_v4 == true {
       service {$service_name:
         ensure     => running,
         enable     => true,
         hasrestart => true,
         hasstatus  => true,
         provider   => 'systemd',  # Ensure systemd is used for service management
-        require    => Package['nfs-utils'],
+        require    => Package['olnfs-utils'],
         subscribe  => [ Concat['/etc/exports'], Augeas['/etc/idmapd.conf'] ],
       }
     } else {
@@ -24,7 +24,7 @@ class nfs::server::redhat::service {
         hasrestart => true,
         hasstatus  => true,
         provider   => 'systemd',  # Ensure systemd is used for service management
-        require    => Package['nfs-utils'],
+        require    => Package['olnfs-utils'],
         subscribe  => Concat['/etc/exports'],
       }
     }

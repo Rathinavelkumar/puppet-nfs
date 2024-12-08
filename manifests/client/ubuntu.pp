@@ -1,14 +1,14 @@
-class nfs::client::ubuntu (
-  $nfs_v4 = false,
-  $nfs_v4_idmap_domain = undef
+class olnfs::client::ubuntu (
+  $olnfs_v4 = false,
+  $olnfs_v4_idmap_domain = undef
 ) {
 
-  include ::nfs::client::ubuntu::install
-  include ::nfs::client::ubuntu::configure
-  include ::nfs::client::ubuntu::service
+  include ::olnfs::client::ubuntu::install
+  include ::olnfs::client::ubuntu::configure
+  include ::olnfs::client::ubuntu::service
 
-  Class['::nfs::client::ubuntu::install']
-  -> Class['::nfs::client::ubuntu::configure']
-  -> Class['::nfs::client::ubuntu::service']
+  Class['::olnfs::client::ubuntu::install']
+  -> Class['::olnfs::client::ubuntu::configure']
+  -> Class['::olnfs::client::ubuntu::service']
 
 }

@@ -1,15 +1,15 @@
-class nfs::client::gentoo (
-  $nfs_v4 = false,
-  $nfs_v4_idmap_domain = undef
+class olnfs::client::gentoo (
+  $olnfs_v4 = false,
+  $olnfs_v4_idmap_domain = undef
 ) {
 
-  include ::nfs::client::gentoo::install
-  include ::nfs::client::gentoo::configure
-  include ::nfs::client::gentoo::service
+  include ::olnfs::client::gentoo::install
+  include ::olnfs::client::gentoo::configure
+  include ::olnfs::client::gentoo::service
 
-  Class['::nfs::client::gentoo::install']
-  -> Class['::nfs::client::gentoo::configure']
-  -> Class['::nfs::client::gentoo::service']
+  Class['::olnfs::client::gentoo::install']
+  -> Class['::olnfs::client::gentoo::configure']
+  -> Class['::olnfs::client::gentoo::service']
 
 
 }

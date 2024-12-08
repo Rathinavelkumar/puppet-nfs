@@ -1,15 +1,15 @@
-class nfs::client::ubuntu::configure {
+class olnfs::client::ubuntu::configure {
 
-  if $nfs::client::ubuntu::nfs_v4 {
+  if $olnfs::client::ubuntu::olnfs_v4 {
       augeas {
-        '/etc/default/nfs-common':
-          context => '/files/etc/default/nfs-common',
+        '/etc/default/olnfs-common':
+          context => '/files/etc/default/olnfs-common',
           changes => [ 'set NEED_IDMAPD yes', ];
         '/etc/idmapd.conf':
           context => '/files/etc/idmapd.conf/General',
           lens    => 'Puppet.lns',
           incl    => '/etc/idmapd.conf',
-          changes => ["set Domain ${nfs::client::ubuntu::nfs_v4_idmap_domain}"],
+          changes => ["set Domain ${olnfs::client::ubuntu::olnfs_v4_idmap_domain}"],
       }
   }
 

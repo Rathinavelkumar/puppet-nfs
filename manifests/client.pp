@@ -1,22 +1,22 @@
-# == Class: nfs::client
+# == Class: olnfs::client
 #
-# Set up NFS client and mounts. NFSv3 and NFSv4 supported.
+# Set up olnfs client and mounts. olnfsv3 and olnfsv4 supported.
 #
 #
 # === Parameters
 #
 # [package_ensure]
-#   Allow to update or set to a specific version the nfs client packages
+#   Allow to update or set to a specific version the olnfs client packages
 #   Default to installed.
 #
-# [nfs_v4]
-#   NFSv4 support.
+# [olnfs_v4]
+#   olnfsv4 support.
 #   Disabled by default.
 #
-# [nfs_v4_mount_root]
+# [olnfs_v4_mount_root]
 #   Mount root, where we  mount shares, default /srv
 #
-# [nfs_v4_idmap_domain]
+# [olnfs_v4_idmap_domain]
 #  Domain setting for idmapd, must be the same across server
 #  and clients.
 #
@@ -25,39 +25,39 @@
 # === Examples
 #
 #
-#  class { 'nfs::client':
-#    nfs_v4              => true,
+#  class { 'olnfs::client':
+#    olnfs_v4              => true,
 #    # Generally parameters below have sane defaults.
-#    nfs_v4_mount_root  => "/srv",
-#    nfs_v4_idmap_domain => $::domain,
+#    olnfs_v4_mount_root  => "/srv",
+#    olnfs_v4_idmap_domain => $::domain,
 #  }
 
-class nfs::client (
-  $package_ensure      = $::nfs::params::client_package_ensure,
-  $nfs_v4              = $::nfs::params::nfs_v4,
-  $nfs_v4_mount_root   = $::nfs::params::nfs_v4_mount_root,
-  $nfs_v4_idmap_domain = $::nfs::params::nfs_v4_idmap_domain,
+class olnfs::client (
+  $package_ensure      = $::olnfs::params::client_package_ensure,
+  $olnfs_v4              = $::olnfs::params::olnfs_v4,
+  $olnfs_v4_mount_root   = $::olnfs::params::olnfs_v4_mount_root,
+  $olnfs_v4_idmap_domain = $::olnfs::params::olnfs_v4_idmap_domain,
   $mounts              = undef
-) inherits nfs::params {
+) inherits olnfs::params {
 
-  validate_bool($nfs_v4)
+  validate_bool($olnfs_v4)
 
   # ensure dependencies for mount
 
-  Class["::nfs::client::${::nfs::params::osfamily}::install"]
-  -> Class["::nfs::client::${::nfs::params::osfamily}::configure"]
-  -> Class["::nfs::client::${::nfs::params::osfamily}::service"]
-  -> Class['::nfs::client']
+  Class["::olnfs::client::${::olnfs::params::osfamily}::install"]
+  -> Class["::olnfs::client::${::olnfs::params::osfamily}::configure"]
+  -> Class["::olnfs::client::${::olnfs::params::osfamily}::service"]
+  -> Class['::olnfs::client']
 
-  if !defined( Class["nfs::client::${::nfs::params::osfamily}"]) {
-    class{ "nfs::client::${::nfs::params::osfamily}":
-      nfs_v4              => $nfs_v4,
-      nfs_v4_idmap_domain => $nfs_v4_idmap_domain,
+  if !defined( Class["olnfs::client::${::olnfs::params::osfamily}"]) {
+    class{ "olnfs::client::${::olnfs::params::osfamily}":
+      olnfs_v4              => $olnfs_v4,
+      olnfs_v4_idmap_domain => $olnfs_v4_idmap_domain,
     }
   }
 
   if $mounts {
-    create_resources(nfs::client::mount, $mounts)
+    create_resources(olnfs::client::mount, $mounts)
   }
 
 }

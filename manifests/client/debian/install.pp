@@ -1,11 +1,11 @@
-class nfs::client::debian::install {
+class olnfs::client::debian::install {
 
   package { 'rpcbind':
-    ensure => $::nfs::client::package_ensure,
+    ensure => $::olnfs::client::package_ensure,
   }
 
-  package { ['nfs-common', 'nfs4-acl-tools']:
-    ensure => $::nfs::client::package_ensure,
+  package { ['olnfs-common', 'olnfs4-acl-tools']:
+    ensure => $::olnfs::client::package_ensure,
   }
 
 }

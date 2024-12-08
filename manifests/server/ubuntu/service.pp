@@ -1,22 +1,22 @@
-class nfs::server::ubuntu::service {
+class olnfs::server::ubuntu::service {
 
-  if $nfs::server::ubuntu::service_manage {
-    if $nfs::server::ubuntu::nfs_v4 == true {
-      service {'nfs-kernel-server':
+  if $olnfs::server::ubuntu::service_manage {
+    if $olnfs::server::ubuntu::olnfs_v4 == true {
+      service {'olnfs-kernel-server':
         ensure     => running,
         enable     => true,
         hasrestart => true,
         hasstatus  => true,
-        require    => Package['nfs-kernel-server'],
-        subscribe  => [ Concat['/etc/exports'], Augeas['/etc/idmapd.conf','/etc/default/nfs-common'] ],
+        require    => Package['olnfs-kernel-server'],
+        subscribe  => [ Concat['/etc/exports'], Augeas['/etc/idmapd.conf','/etc/default/olnfs-common'] ],
       }
     } else {
-      service {'nfs-kernel-server':
+      service {'olnfs-kernel-server':
         ensure     => running,
         enable     => true,
         hasrestart => true,
         hasstatus  => true,
-        require    => Package['nfs-kernel-server'],
+        require    => Package['olnfs-kernel-server'],
         subscribe  => Concat['/etc/exports'],
       }
     }

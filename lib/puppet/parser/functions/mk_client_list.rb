@@ -1,5 +1,5 @@
 # This function generates a list of clients and options suitable for
-# handing to the nfs::export type. It takes:
+# handing to the olnfs::export type. It takes:
 #  clients - An array of client hosts   ex: ['some_host.dom.com']
 #  options - A hash of client -> client_options  
 #           ex: {'some_host.dom.com' => 'ro'}
@@ -14,14 +14,14 @@
 #       'hostb.dom.com' => 'rw,no_root_squash',
 #       'hostc.dom.com' => 'ro'}
 #
-# nfs::server::export {'/data':
+# olnfs::server::export {'/data':
 #   clients => mk_client_list(keys($clients), $clients, ''),
 # etc...
 #
 # Or in this style:
 #
 # $clients = ['hosta.dom.com', 'hostb.dom.com', ...]
-# nfs::server::export {'/data':
+# olnfs::server::export {'/data':
 #   clients => mk_client_list($clients, {}, 'rw,no_root_squash')
 #
 # Or some combination of the two, like a client array with a separate hash

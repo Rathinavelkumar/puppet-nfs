@@ -1,14 +1,14 @@
-class nfs::client::debian (
-  $nfs_v4 = false,
-  $nfs_v4_idmap_domain = undef
+class olnfs::client::debian (
+  $olnfs_v4 = false,
+  $olnfs_v4_idmap_domain = undef
 ) {
 
-  include ::nfs::client::debian::install
-  include ::nfs::client::debian::configure
-  include ::nfs::client::debian::service
+  include ::olnfs::client::debian::install
+  include ::olnfs::client::debian::configure
+  include ::olnfs::client::debian::service
 
-  Class['::nfs::client::debian::install']
-  -> Class['::nfs::client::debian::configure']
-  -> Class['::nfs::client::debian::service']
+  Class['::olnfs::client::debian::install']
+  -> Class['::olnfs::client::debian::configure']
+  -> Class['::olnfs::client::debian::service']
 
 }

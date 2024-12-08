@@ -12,4 +12,4 @@ fixtures:
     augeasproviders_shellvar:
       repo: "git://github.com/hercules-team/augeasproviders_shellvar.git"
   symlinks:
-    "nfs": "#{source_dir}"
+    "olnfs": "#{source_dir}"

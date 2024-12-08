@@ -1,4 +1,4 @@
-define nfs::server::export::configure (
+define olnfs::server::export::configure (
   $clients,
   $ensure = 'present'
 ) {

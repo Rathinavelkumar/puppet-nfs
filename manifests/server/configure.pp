@@ -1,19 +1,19 @@
-class nfs::server::configure {
+class olnfs::server::configure {
 
   concat {'/etc/exports':
     ensure  => present,
-    require => Class["nfs::server::${::nfs::params::osfamily}"],
+    require => Class["olnfs::server::${::olnfs::params::osfamily}"],
   }
 
 
   concat::fragment{
-    'nfs_exports_header':
+    'olnfs_exports_header':
       target  => '/etc/exports',
-      content => "# This file is configured through the nfs::server puppet module\n",
+      content => "# This file is configured through the olnfs::server puppet module\n",
       order   => '01';
   }
 
-  if $nfs::server::nfs_v4 == true {
-    include nfs::server::nfs_v4::configure
+  if $olnfs::server::olnfs_v4 == true {
+    include olnfs::server::olnfs_v4::configure
   }
 }

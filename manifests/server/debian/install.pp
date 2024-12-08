@@ -1,7 +1,7 @@
-class nfs::server::debian::install {
+class olnfs::server::debian::install {
 
-  package { 'nfs-kernel-server':
-    ensure => $::nfs::server::package_ensure
+  package { 'olnfs-kernel-server':
+    ensure => $::olnfs::server::package_ensure
   }
 
 }

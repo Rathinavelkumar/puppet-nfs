@@ -1,14 +1,14 @@
-class nfs::client::redhat (
-  $nfs_v4              = false,
-  $nfs_v4_idmap_domain = undef
-) inherits nfs::client::redhat::params {
+class olnfs::client::redhat (
+  $olnfs_v4              = false,
+  $olnfs_v4_idmap_domain = undef
+) inherits olnfs::client::redhat::params {
 
-  include ::nfs::client::redhat::install
-  include ::nfs::client::redhat::configure
-  include ::nfs::client::redhat::service
+  include ::olnfs::client::redhat::install
+  include ::olnfs::client::redhat::configure
+  include ::olnfs::client::redhat::service
 
-  Class['::nfs::client::redhat::install']
-  -> Class['::nfs::client::redhat::configure']
-  -> Class['::nfs::client::redhat::service']
+  Class['::olnfs::client::redhat::install']
+  -> Class['::olnfs::client::redhat::configure']
+  -> Class['::olnfs::client::redhat::service']
 
 }

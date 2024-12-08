@@ -1,81 +1,81 @@
-# == Class: nfs::server
+# == Class: olnfs::server
 #
-# Set up NFS server and exports. NFSv3 and NFSv4 supported.
+# Set up olnfs server and exports. olnfsv3 and olnfsv4 supported.
 #
 #
 # === Parameters
 #
 # [package_ensure]
-#   Allow to update or set to a specific version the nfs server packages
+#   Allow to update or set to a specific version the olnfs server packages
 #   Default to installed.
 #
-# [nfs_v4]
-#   NFSv4 support. Will set up automatic bind mounts to export root.
+# [olnfs_v4]
+#   olnfsv4 support. Will set up automatic bind mounts to export root.
 #   Disabled by default.
 #
-# [nfs_v4_export_root]
+# [olnfs_v4_export_root]
 #   Export root, where we bind mount shares, default /export
 #
-# [nfs_v4_idmap_domain]
+# [olnfs_v4_idmap_domain]
 #   Domain setting for idmapd, must be the same across server
 #   and clients.
 #   Default is to use $domain fact.
 #
 # [service_manage]
-#   Should this class manage the services behind nfs? Set this to false
+#   Should this class manage the services behind olnfs? Set this to false
 #   if you are managing the service in another way (e.g. pacemaker).
 #
 # === Examples
 #
 #
-#  class { nfs::server:
-#    nfs_v4                      => true,
-#     nfs_v4_export_root_clients => "*.${::domain}(ro,fsid=root,insecure,no_subtree_check,async,root_squash)",
+#  class { olnfs::server:
+#    olnfs_v4                      => true,
+#     olnfs_v4_export_root_clients => "*.${::domain}(ro,fsid=root,insecure,no_subtree_check,async,root_squash)",
 #    # Generally parameters below have sane defaults.
-#    nfs_v4_export_root  => "/export",
-#    nfs_v4_idmap_domain => $::domain,
+#    olnfs_v4_export_root  => "/export",
+#    olnfs_v4_idmap_domain => $::domain,
 #  }
 
-class nfs::server (
-  $package_ensure               = $::nfs::params::server_package_ensure,
-  $nfs_v4                       = $nfs::params::nfs_v4,
-  $nfs_v4_export_root           = $nfs::params::nfs_v4_export_root,
-  $nfs_v4_export_root_clients   = $nfs::params::nfs_v4_export_root_clients,
-  $nfs_v4_idmap_domain          = $nfs::params::nfs_v4_idmap_domain,
+class olnfs::server (
+  $package_ensure               = $::olnfs::params::server_package_ensure,
+  $olnfs_v4                       = $olnfs::params::olnfs_v4,
+  $olnfs_v4_export_root           = $olnfs::params::olnfs_v4_export_root,
+  $olnfs_v4_export_root_clients   = $olnfs::params::olnfs_v4_export_root_clients,
+  $olnfs_v4_idmap_domain          = $olnfs::params::olnfs_v4_idmap_domain,
   #
   $service_manage               = true,
   #
-  $nfs_v4_root_export_ensure    = 'mounted',
-  $nfs_v4_root_export_mount     = undef,
-  $nfs_v4_root_export_remounts  = false,
-  $nfs_v4_root_export_atboot    = false,
-  $nfs_v4_root_export_options   = '_netdev',
-  $nfs_v4_root_export_bindmount = undef,
-  $nfs_v4_root_export_tag       = undef,
+  $olnfs_v4_root_export_ensure    = 'mounted',
+  $olnfs_v4_root_export_mount     = undef,
+  $olnfs_v4_root_export_remounts  = false,
+  $olnfs_v4_root_export_atboot    = false,
+  $olnfs_v4_root_export_options   = '_netdev',
+  $olnfs_v4_root_export_bindmount = undef,
+  $olnfs_v4_root_export_tag       = undef,
   #
   $mountd_port                  = undef,
   $mountd_threads               = undef,
   #
   $exports                      = undef,
-) inherits nfs::params {
+) inherits olnfs::params {
 
-  validate_bool($nfs_v4)
+  validate_bool($olnfs_v4)
   validate_bool($service_manage)
-  validate_bool($nfs_v4_root_export_remounts)
-  validate_bool($nfs_v4_root_export_atboot)
+  validate_bool($olnfs_v4_root_export_remounts)
+  validate_bool($olnfs_v4_root_export_atboot)
 
-  class { "nfs::server::${::nfs::params::osfamily}":
-    nfs_v4              => $nfs_v4,
-    nfs_v4_idmap_domain => $nfs_v4_idmap_domain,
+  class { "olnfs::server::${::olnfs::params::osfamily}":
+    olnfs_v4              => $olnfs_v4,
+    olnfs_v4_idmap_domain => $olnfs_v4_idmap_domain,
     mountd_port         => $mountd_port,
     mountd_threads      => $mountd_threads,
     service_manage      => $service_manage,
   }
 
-  include nfs::server::configure
+  include olnfs::server::configure
 
   if $exports {
-    create_resources(nfs::server::export, $exports)
+    create_resources(olnfs::server::export, $exports)
   }
 
 }

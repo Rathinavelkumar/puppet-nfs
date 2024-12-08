@@ -1,14 +1,14 @@
 
 require 'spec_helper'
-describe 'nfs::server::ubuntu', :type => :class do
+describe 'olnfs::server::ubuntu', :type => :class do
   it do
-    should contain_class('nfs::client::ubuntu')
-    should contain_class('nfs::server::ubuntu::service')
-    should contain_package('nfs-kernel-server')
-    should contain_service('nfs-kernel-server').with( 'ensure' => 'running'  )
+    should contain_class('olnfs::client::ubuntu')
+    should contain_class('olnfs::server::ubuntu::service')
+    should contain_package('olnfs-kernel-server')
+    should contain_service('olnfs-kernel-server').with( 'ensure' => 'running'  )
   end
-  context ":nfs_v4 => true" do
-    let(:params) {{ :nfs_v4 => true }}
+  context ":olnfs_v4 => true" do
+    let(:params) {{ :olnfs_v4 => true }}
     it do
       should contain_service('idmapd').with( 'ensure' => 'running'  )
     end

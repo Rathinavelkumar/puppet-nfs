@@ -1,13 +1,13 @@
 require 'spec_helper'
-describe 'nfs::server::gentoo' do
+describe 'olnfs::server::gentoo' do
 
   it do
-    should contain_class('nfs::client::gentoo')
-    should contain_class('nfs::server::gentoo::service')
-    should contain_service('nfs').with( 'ensure' => 'running'  )
+    should contain_class('olnfs::client::gentoo')
+    should contain_class('olnfs::server::gentoo::service')
+    should contain_service('olnfs').with( 'ensure' => 'running'  )
   end
-  context ":nfs_v4 => true" do
-    let(:params) {{ :nfs_v4 => true , :nfs_v4_idmap_domain => 'teststring' }}
+  context ":olnfs_v4 => true" do
+    let(:params) {{ :olnfs_v4 => true , :olnfs_v4_idmap_domain => 'teststring' }}
     it do
       should contain_augeas('/etc/idmapd.conf').with_changes(/set Domain teststring/)
     end
