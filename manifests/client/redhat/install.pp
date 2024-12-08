@@ -6,7 +6,7 @@ class olnfs::client::redhat::install {
   Package {
     before => Class['olnfs::client::redhat::configure']
   }
-  package { 'olnfs-utils':
+  package { 'nfs-utils':
     ensure => $::olnfs::client::package_ensure,
   }
 
