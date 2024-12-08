@@ -38,7 +38,7 @@ define olnfs::client::mount (
       remounts => $remounts,
       atboot   => $atboot,
       require  => [
-        olnfs::Mkdir[$_nfs4_mount],
+        Olnfs::Mkdir[$_nfs4_mount],
         Class['::olnfs::client'],
       ],
     }
