@@ -32,7 +32,7 @@ define olnfs::client::mount (
     mount {"shared ${server}:${share} by ${::clientcert} on ${_olnfs4_mount}":
       ensure   => $ensure,
       device   => "${server}:/${share}",
-      fstype   => 'olnfs4',
+      fstype   => 'nfs4',
       name     => $_nfs4_mount,
       options  => $options,
       remounts => $remounts,
