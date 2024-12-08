@@ -1,6 +1,6 @@
 class olnfs::server::redhat::install {
 
-  package { 'olnfs4-acl-tools':
+  package { 'nfs4-acl-tools':
     ensure => $::olnfs::server::package_ensure,
   }
 
