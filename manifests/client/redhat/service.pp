@@ -7,7 +7,7 @@ class olnfs::client::redhat::service {
   service { 'rpcbind':
     ensure => running,
     enable => true,
-    require  => Package['olnfs-utils'],  # Ensure rpcbind starts after olnfs-utils
+    require  => Package['nfs-utils'],  # Ensure rpcbind starts after olnfs-utils
     provider => 'systemd',             # Use systemd provider (required for OL8)
   }
 
@@ -30,7 +30,7 @@ class olnfs::client::redhat::service {
       8 => Service['rpcbind'], # OL8 still requires rpcbind
       7 => Service['rpcbind'],
       6 => Service['rpcbind'],
-      5 => [Package['portmap'], Package['olnfs-utils']]
+      5 => [Package['portmap'], Package['nfs-utils']]
     },
     provider => 'systemd',       # Use systemd for OL8, as it's the default for OL8 and other systemd systems
   }
@@ -39,8 +39,8 @@ class olnfs::client::redhat::service {
     service { 'netfs':
       enable  => true,
       require => $::olnfs::client::redhat::params::osmajor ? {
-        6 => Service['olnfslock'],
-        5 => [Service['portmap'], Service['olnfslock']],
+        6 => Service['nfslock'],
+        5 => [Service['portmap'], Service['nfslock']],
       },
     }
   }
@@ -53,14 +53,14 @@ class olnfs::client::redhat::service {
         default => true
       },
       hasstatus => true,
-      require   => [Package['rpcbind'], Package['olnfs-utils']],
+      require   => [Package['rpcbind'], Package['nfs-utils']],
     }
   } elsif $::olnfs::client::redhat::params::osmajor == 5 {
     service { 'portmap':
       ensure    => running,
       enable    => true,
       hasstatus => true,
-      require   => [Package['portmap'], Package['olnfs-utils']],
+      require   => [Package['portmap'], Package['nfs-utils']],
     }
   }
 
