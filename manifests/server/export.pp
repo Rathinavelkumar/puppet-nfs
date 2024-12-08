@@ -30,7 +30,7 @@ define olnfs::server::export (
     olnfs::server::export::configure { "${olnfs::server::olnfs_v4_export_root}/${v4_export_name}":
       ensure  => $ensure,
       clients => $clients,
-      require => olnfs::Server::Export::olnfs_v4::Bindmount[$name]
+      require => Olnfs::Server::Export::Olnfs_v4::Bindmount[$name]
     }
 
     @@olnfs::client::mount { "shared ${v4_export_name} by ${::clientcert}":
