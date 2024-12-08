@@ -22,27 +22,27 @@ define olnfs::client::mount::olnfs_v4::root (
   include ::olnfs::client
 
   if $mount == undef {
-    $_olnfs4_mount = $olnfs::client::olnfs_v4_mount_root
+    $_nfs4_mount = $olnfs::client::olnfs_v4_mount_root
   } else {
-    $_olnfs4_mount = $mount
+    $_nfs4_mount = $mount
   }
 
-  olnfs::mkdir{ $_olnfs4_mount: }
+  olnfs::mkdir{ $_nfs4_mount: }
 
   mount {"shared root by ${::clientcert} on ${_olnfs4_mount}":
     ensure   => $ensure,
     device   => "${server}:/",
     fstype   => 'olnfs4',
-    name     => $_olnfs4_mount,
+    name     => $_nfs4_mount,
     options  => $options,
     remounts => $remounts,
     atboot   => $atboot,
-    require  => olnfs::Mkdir[$_olnfs4_mount],
+    require  => olnfs::Mkdir[$_nfs4_mount],
   }
 
 
   if $bindmount != undef {
-    olnfs::client::mount::olnfs_v4::bindmount { $_olnfs4_mount:
+    olnfs::client::mount::olnfs_v4::bindmount { $_nfs4_mount:
       ensure     => $ensure,
       mount_name => $bindmount,
     }

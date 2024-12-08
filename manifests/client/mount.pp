@@ -18,12 +18,12 @@ define olnfs::client::mount (
   if $olnfs::client::olnfs_v4 == true {
 
     if $mount == undef {
-      $_olnfs4_mount = "${olnfs::client::olnfs_v4_mount_root}/${share}"
+      $_nfs4_mount = "${olnfs::client::olnfs_v4_mount_root}/${share}"
     } else {
-      $_olnfs4_mount = $mount
+      $_nfs4_mount = $mount
     }
 
-    olnfs::mkdir { $_olnfs4_mount:
+    olnfs::mkdir { $_nfs4_mount:
       owner => $owner,
       group => $group,
       perm  => $perm;
@@ -33,19 +33,19 @@ define olnfs::client::mount (
       ensure   => $ensure,
       device   => "${server}:/${share}",
       fstype   => 'olnfs4',
-      name     => $_olnfs4_mount,
+      name     => $_nfs4_mount,
       options  => $options,
       remounts => $remounts,
       atboot   => $atboot,
       require  => [
-        olnfs::Mkdir[$_olnfs4_mount],
+        olnfs::Mkdir[$_nfs4_mount],
         Class['::olnfs::client'],
       ],
     }
 
 
     if $bindmount != undef {
-      olnfs::client::mount::olnfs_v4::bindmount { $_olnfs4_mount:
+      olnfs::client::mount::olnfs_v4::bindmount { $_nfs4_mount:
         ensure     => $ensure,
         mount_name => $bindmount,
       }
